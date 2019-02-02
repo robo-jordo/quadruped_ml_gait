@@ -7,29 +7,34 @@
   <xacro:property name="mass" value="1" /> <!-- arbitrary value for mass -->
   <xacro:property name="width" value="0.1" /> <!-- Square dimensions (widthxwidth) of beams -->
   <!--Body -->
+  <xacro:property name="mass_body" value="1" />
   <xacro:property name="body_width" value="0.81" /> <!-- width of body -->
   <xacro:property name="body_length" value="1.13" /> <!-- length of body -->
   <xacro:property name="body_height" value="0.25" /> <!-- height of body -->
 
   <!--block -->
-  <xacro:property name="block_width" value="0.22" /> <!-- width of body -->
-  <xacro:property name="block_length" value="0.17" /> <!-- length of body -->
-  <xacro:property name="block_height" value="0.25" /> <!-- height of body -->
+  <xacro:property name="mass_block" value="1" />
+  <xacro:property name="block_width" value="0.22" /> <!-- width of block -->
+  <xacro:property name="block_length" value="0.17" /> <!-- length of  block -->
+  <xacro:property name="block_height" value="0.25" /> <!-- height of block -->
 
   <!--Hip -->
-  <xacro:property name="hip_width" value="0.4" /> <!-- width of body -->
-  <xacro:property name="hip_length" value="0.4" /> <!-- length of body -->
-  <xacro:property name="hip_height" value="0.4" /> <!-- height of body -->
+  <xacro:property name="mass_hip" value="1" />
+  <xacro:property name="hip_width" value="0.4" /> <!-- width of hip -->
+  <xacro:property name="hip_length" value="0.4" /> <!-- length of hip -->
+  <xacro:property name="hip_height" value="0.4" /> <!-- height of hip -->
 
   <!--leg -->
-  <xacro:property name="leg_width" value="0.25" /> <!-- width of body -->
-  <xacro:property name="leg_length" value="0.15" /> <!-- length of body -->
-  <xacro:property name="leg_height" value="0.45" /> <!-- height of body -->
+  <xacro:property name="mass_leg" value="1" />
+  <xacro:property name="leg_width" value="0.25" /> <!-- width of leg -->
+  <xacro:property name="leg_length" value="0.15" /> <!-- length of leg -->
+  <xacro:property name="leg_height" value="0.45" /> <!-- height of leg -->
 
     <!--foot -->
-  <xacro:property name="foot_width" value="0.01" /> <!-- width of body -->
-  <xacro:property name="foot_length" value="0.01" /> <!-- length of body -->
-  <xacro:property name="foot_height" value="0.75" /> <!-- height of body -->
+  <xacro:property name="mass_foot" value="1" />
+  <xacro:property name="foot_width" value="0.01" /> <!-- width of foot -->
+  <xacro:property name="foot_length" value="0.01" /> <!-- length of foot -->
+  <xacro:property name="foot_height" value="0.75" /> <!-- height of foot -->
   
   
   <xacro:property name="height1" value="0.0001" /> <!-- Link 1 -->
@@ -70,11 +75,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_body}"/>
       <inertia
-    ixx="${mass / 12.0*(body_length*body_length + body_height*body_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (body_height*body_height + body_width*body_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (body_width*body_width + body_length*body_length)}"/>
+    ixx="${mass_body / 12.0*(body_length*body_length + body_height*body_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_body / 12.0 * (body_height*body_height + body_width*body_width)}" iyz="0.0"
+    izz="${mass_body / 12.0 * (body_width*body_width + body_length*body_length)}"/>
     </inertial>
   </link>
 
@@ -96,11 +101,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_block}"/>
       <inertia
-    ixx="${mass / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (block_width*block_width + block_length*block_length)}"/>
+    ixx="${mass_block / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_block / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
+    izz="${mass_block / 12.0 * (block_width*block_width + block_length*block_length)}"/>
     </inertial>
   </link>
 
@@ -122,11 +127,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_block}"/>
       <inertia
-    ixx="${mass / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (block_width*block_width + block_length*block_length)}"/>
+    ixx="${mass_block / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_block / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
+    izz="${mass_block / 12.0 * (block_width*block_width + block_length*block_length)}"/>
     </inertial>
   </link>
 
@@ -148,11 +153,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_block}"/>
       <inertia
-    ixx="${mass / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (block_width*block_width + block_length*block_length)}"/>
+    ixx="${mass_block / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_block / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
+    izz="${mass_block / 12.0 * (block_width*block_width + block_length*block_length)}"/>
     </inertial>
   </link>
 
@@ -174,11 +179,11 @@
 
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_block}"/>
       <inertia
-    ixx="${mass / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (block_width*block_width + block_length*block_length)}"/>
+    ixx="${mass_block / 12.0*(block_length*block_length + block_height*block_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_block / 12.0 * (block_height*block_height + block_width*block_width)}" iyz="0.0"
+    izz="${mass_block / 12.0 * (block_width*block_width + block_length*block_length)}"/>
     </inertial>
   </link>
 
@@ -215,7 +220,7 @@
     <child link="hip1"/>
     <origin xyz="${block_width/2} 0 0" rpy="0 0 -3.14"/>
     <axis xyz="0 0 1" />
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
     <joint name="hip_j2" type="revolute">
@@ -223,7 +228,7 @@
     <child link="hip2"/>
     <origin xyz="${block_width/2} 0 0" rpy="0 0 -3.14"/>
     <axis xyz="0 0 1" />
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
 
@@ -232,7 +237,7 @@
     <child link="hip3"/>
     <origin xyz="${-block_width/2} 0 0" rpy="0 0 0"/>
     <axis xyz="0 0 1" />
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
 
@@ -241,7 +246,7 @@
     <child link="hip4"/>
     <origin xyz="${-block_width/2} 0 0" rpy="0 0 0"/>
     <axis xyz="0 0 1" />
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <!-- Base Link -->
@@ -263,11 +268,11 @@
 
     <inertial>
       <origin xyz="${-hip_width/2} 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_hip}"/>
       <inertia
-	  ixx="${mass / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
-	  iyy="${mass / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
-	  izz="${mass / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
+	  ixx="${mass_hip / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass_hip / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
+	  izz="${mass_hip / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
     </inertial>
   </link>
 
@@ -289,11 +294,11 @@
 
     <inertial>
       <origin xyz="${-hip_width/2} 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_hip}"/>
       <inertia
-    ixx="${mass / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
+    ixx="${mass_hip / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_hip / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
+    izz="${mass_hip / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
     </inertial>
   </link>
 
@@ -315,11 +320,11 @@
 
     <inertial>
       <origin xyz="${-hip_width/2} 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_hip}"/>
       <inertia
-    ixx="${mass / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
+    ixx="${mass_hip / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_hip / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
+    izz="${mass_hip / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
     </inertial>
   </link>
 
@@ -341,11 +346,11 @@
 
     <inertial>
       <origin xyz="${-hip_width/2} 0 0" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_hip}"/>
       <inertia
-    ixx="${mass / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
+    ixx="${mass_hip / 12.0 * (hip_length*hip_length + hip_height*hip_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_hip / 12.0 * (hip_height*hip_height + hip_width*hip_width)}" iyz="0.0"
+    izz="${mass_hip / 12.0 * (hip_length*hip_length + hip_width*hip_width)}"/>
     </inertial>
   </link>
 
@@ -355,7 +360,7 @@
     <origin xyz="${-hip_width} 0 ${-hip_height/3}" rpy="0 ${-PI/2-0.4} 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="knee_j2" type="revolute">
@@ -364,7 +369,7 @@
     <origin xyz="${-hip_width} 0 ${-hip_height/3}" rpy="0 ${-PI/2-0.4} 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="knee_j3" type="revolute">
@@ -373,7 +378,7 @@
     <origin xyz="${-hip_width} 0 ${-hip_height/3}" rpy="0 ${-PI/2-0.4} 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="knee_j4" type="revolute">
@@ -382,7 +387,7 @@
     <origin xyz="${-hip_width} 0 ${-hip_height/3}" rpy="0 ${-PI/2-0.4} 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <!-- Middle Link -->
@@ -404,11 +409,11 @@
 
     <inertial>
       <origin xyz="0 0 ${leg_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_leg}"/>
       <inertia
-	  ixx="${mass / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
-	  iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
-	  izz="${mass / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
+	  ixx="${mass_leg / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass_leg / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+	  izz="${mass_leg / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
     </inertial>
   </link>
 
@@ -430,11 +435,11 @@
 
     <inertial>
       <origin xyz="0 0 ${leg_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_leg}"/>
       <inertia
-    ixx="${mass / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
+    ixx="${mass_leg / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_leg / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+    izz="${mass_leg / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
     </inertial>
   </link>
 
@@ -456,11 +461,11 @@
 
     <inertial>
       <origin xyz="0 0 ${leg_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_leg}"/>
       <inertia
-    ixx="${mass / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
+    ixx="${mass_leg / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_leg / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+    izz="${mass_leg / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
     </inertial>
   </link>
 
@@ -482,11 +487,11 @@
 
     <inertial>
       <origin xyz="0 0 ${leg_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_leg}"/>
       <inertia
-    ixx="${mass / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
-    izz="${mass / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
+    ixx="${mass_leg / 12.0 * (leg_length*leg_length + leg_height*leg_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_leg / 12.0 * (leg_height*leg_height + leg_width*leg_width)}" iyz="0.0"
+    izz="${mass_leg / 12.0 * (leg_width*leg_width + leg_length*leg_length)}"/>
     </inertial>
   </link>
 
@@ -496,7 +501,7 @@
     <origin xyz="0 0 ${leg_height}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-3" upper="3"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="ankle_j2" type="revolute">
@@ -505,7 +510,7 @@
     <origin xyz="0 0 ${leg_height}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="ankle_j3" type="revolute">
@@ -514,7 +519,7 @@
     <origin xyz="0 0 ${leg_height}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <joint name="ankle_j4" type="revolute">
@@ -523,7 +528,7 @@
     <origin xyz="0 0 ${leg_height}" rpy="0 0 0"/>
     <axis xyz="0 1 0"/>
     <dynamics damping="0.7"/>
-    <limit effort="30" velocity="1.0" lower="-1.7" upper="1.7"/>
+    <limit effort="300" velocity="1.0" lower="-1.7" upper="1.7"/>
   </joint>
 
   <!-- Top Link -->
@@ -545,11 +550,11 @@
 
     <inertial>
       <origin xyz="0 0 ${foot_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_foot}"/>
       <inertia
-	  ixx="${mass / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
-	  iyy="${mass / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
-	  izz="${mass / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
+	  ixx="${mass_foot / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
+	  iyy="${mass_foot / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
+	  izz="${mass_foot / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
     </inertial>
   </link>
 
@@ -571,11 +576,11 @@
 
     <inertial>
       <origin xyz="0 0 ${foot_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_foot}"/>
       <inertia
-    ixx="${mass / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
-    izz="${mass / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
+    ixx="${mass_foot / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_foot / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
+    izz="${mass_foot / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
     </inertial>
   </link>
 
@@ -597,11 +602,11 @@
 
     <inertial>
       <origin xyz="0 0 ${foot_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_foot}"/>
       <inertia
-    ixx="${mass / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
-    izz="${mass / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
+    ixx="${mass_foot / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_foot / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
+    izz="${mass_foot / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
     </inertial>
   </link>
 
@@ -623,87 +628,15 @@
 
     <inertial>
       <origin xyz="0 0 ${foot_height/2}" rpy="0 0 0"/>
-      <mass value="${mass}"/>
+      <mass value="${mass_foot}"/>
       <inertia
-    ixx="${mass / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
-    iyy="${mass / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
-    izz="${mass / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
+    ixx="${mass_foot / 12.0 * (foot_length*foot_length + foot_height*foot_height)}" ixy="0.0" ixz="0.0"
+    iyy="${mass_foot / 12.0 * (foot_width*foot_width + foot_height*foot_height)}" iyz="0.0"
+    izz="${mass_foot / 12.0 * (foot_width*foot_width + foot_length*foot_length)}"/>
     </inertial>
   </link>
 
-  <joint name="hokuyo_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0 0 ${height3 - axel_offset/2}" rpy="0 0 0"/>
-    <parent link="foot1"/>
-    <child link="hokuyo_link"/>
-  </joint>
 
-  <!-- Hokuyo Laser -->
-  <link name="hokuyo_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://rrbot_description/meshes/hokuyo.dae"/>
-      </geometry>
-    </visual>
-
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
-
-  <joint name="camera_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="${camera_link} 0 ${height3 - axel_offset*2}" rpy="0 0 0"/>
-    <parent link="foot1"/>
-    <child link="camera_link"/>
-  </joint>
-
-  <!-- Camera -->
-  <link name="camera_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="${camera_link} ${camera_link} ${camera_link}"/>
-      </geometry>
-    </collision>
-
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-	<box size="${camera_link} ${camera_link} ${camera_link}"/>
-      </geometry>
-      <material name="red"/>
-    </visual>
-
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
-
-  <!-- generate an optical frame http://www.ros.org/reps/rep-0103.html#suffix-frames
-      so that ros and opencv can operate on the camera frame correctly -->
-  <joint name="camera_optical_joint" type="fixed">
-    <!-- these values have to be these values otherwise the gazebo camera image
-        won't be aligned properly with the frame it is supposedly originating from -->
-    <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
-    <parent link="camera_link"/>
-    <child link="camera_link_optical"/>
-  </joint>
-
-  <link name="camera_link_optical">
-  </link>
 
   <transmission name="tran1">
     <type>transmission_interface/SimpleTransmission</type>

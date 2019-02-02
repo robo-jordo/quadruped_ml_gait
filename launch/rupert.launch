@@ -41,7 +41,6 @@
   </node>
 
 
-
   <param name="robot_description"
     command="$(find xacro)/xacro --inorder '$(find rupert_learns)/urdf/rupert.xacro'" />
 

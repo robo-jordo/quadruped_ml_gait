@@ -33,67 +33,75 @@
   <!-- Link1 -->
   <gazebo reference="hip1">
     <material>Gazebo/Orange</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
   </gazebo>
 
   <gazebo reference="hip2">
     <material>Gazebo/Orange</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
   </gazebo>
 
   <gazebo reference="hip3">
     <material>Gazebo/Orange</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
   </gazebo>
 
   <gazebo reference="hip4">
     <material>Gazebo/Orange</material>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
   </gazebo>
 
   <!-- Link2 -->
   <gazebo reference="leg1">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Black</material>
   </gazebo>
 
   <gazebo reference="leg2">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Black</material>
   </gazebo>
 
   <gazebo reference="leg3">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Black</material>
   </gazebo>
 
   <gazebo reference="leg4">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Black</material>
   </gazebo>
 
   <!-- Link3 -->
   <gazebo reference="foot1">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Orange</material>
   </gazebo>
 
   <gazebo reference="foot2">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Orange</material>
   </gazebo>
 
   <gazebo reference="foot3">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Orange</material>
   </gazebo>
 
   <gazebo reference="foot4">
-    <mu1>0.2</mu1>
-    <mu2>0.2</mu2>
+    <mu1>0.8</mu1>
+    <mu2>0.8</mu2>
     <material>Gazebo/Orange</material>
   </gazebo>
 
