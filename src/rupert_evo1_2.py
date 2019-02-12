@@ -22,6 +22,8 @@ population_size = 64
 pop = []
 surv = []
 sco = []
+hei = []
+dis = []
 length = 256
 limit = 1.6
 xml_string = ''
@@ -102,26 +104,35 @@ def fitness(guess):
 			ankle3.publish(((guess[i+6])/6.0)*limit)
 			ankle4.publish(((guess[i+7])/6.0)*limit)
 			rospy.sleep(0.8)
-	performance = final_position-initial_position + height_average/8
-
+	performance = final_position - initial_position + height_average
 	rec_count = 0
 	#unload_controllers()
 	delete_model("rupert")
-	return performance
+	return performance, final_position, height_average
 
 
 def best_n(n, scores):
 	global surv
 	global sco
 	global pop
+	global hei
+	global dis
 	surv = []
 	sco = []
+	hei2 = hei 
+	dis2 = dis
+	hei = []
+	dis = [] 
 	for i in range(n):
 		index = np.argmax(scores)
 		surv.append(pop[index])
 		sco.append(scores[index])
+		hei.append(hei2[index])
+		dis.append(dis2[index])
 		pop.pop(index)
 		scores = np.delete(scores, index)
+		hei2.pop(index)
+		dis2.pop(index)
 	pop = surv
 
 def mate(individual1, individual2):
@@ -133,6 +144,8 @@ def mate(individual1, individual2):
 def mutate(radiation1, radiation2):
 	global pop
 	global sco
+	global hei
+	global dis
 	for i in range(int(radiation1*(population_size/2))):
 		index = random.randint((population_size/2),(population_size-1))
 		print(index)
@@ -145,7 +158,7 @@ def mutate(radiation1, radiation2):
 			specimen = begin + end
 		print(specimen)
 		pop[index] = specimen
-		sco[index] = fitness(pop[index])
+		sco[index],dis[index],hei[index] = fitness(pop[index])
 
 def callback(data):
 	global height_count
@@ -162,23 +175,32 @@ def callback(data):
 		pass
 
 def main():
-
+	global hei
+	global dis
 	global pop
 	global sco
 	global surv
 	sco = []
 	pop = []
 	surv = []
+	hei = []
+	dis = []
 	running_fitness = []
+	running_height = []
+	running_dist = []
 	generation = 0
 	load_controllers()
 	delete_model("rupert")
 	first_population(population_size,length)
 	for i in range(population_size):
-		score = fitness(pop[i])
+		score, distance_temp, height_temp = fitness(pop[i])
 		print("individual "+ str(i)+": "+str(score))
 		sco.append(score)
+		hei.append(height_temp)
+		dis.append(distance_temp)
 	fit = np.array(sco)
+	height_arr = np.array(hei)
+	dist_arr = np.array(dis)
 	while(generation<150):
 		generation += 1
 		print("generation: "+ str(generation))	
@@ -189,9 +211,15 @@ def main():
 				child1, child2 = mate(pop[j],pop[j+1])
 				pop.append(child1)
 				pop.append(child2)
-				sco.append(fitness(child1))
+				fitness_temp, distance_temp, height_temp = fitness(child1)
+				sco.append(fitness_temp)
+				hei.append(height_temp)
+				dis.append(distance_temp)
 				print("individual "+ str(j)+": "+str(sco[-1]))
-				sco.append(fitness(child2))
+				fitness_temp, distance_temp, height_temp = fitness(child2)
+				sco.append(fitness_temp)
+				hei.append(height_temp)
+				dis.append(distance_temp)
 				print("individual "+ str(j+1)+": "+str(sco[-1]))
 		# change this to only mutate children
 		if generation<100:
@@ -199,7 +227,11 @@ def main():
 		else:
 			mutate(0.4,0.2)
 		fit = np.array(sco)
+		height_arr = np.array(hei)
+		dist_arr = np.array(dis)
 		running_fitness.append(np.max(fit))
+		running_height.append(np.max(height_arr))
+		running_dist.append(np.max(dist_arr))
 		file = open("evolution_1_gen"+str(generation)+".txt","w") 
 		file.write(str(pop))
 		file.write(str(sco))
@@ -216,6 +248,11 @@ def main():
 	file = open("evolution_1_fitness.txt","w") 
 	for i in range(len(running_fitness)):
 		file.write(str(running_fitness[i])+",") 
+	rospy.loginfo("Done")
+	file.close() 
+	file = open("evolution_1_breakdown.txt","w") 
+	file.write(str(running_dist)+"\n")
+ 	file.write(str(running_height)+"\n")
 	rospy.loginfo("Done")
 	file.close() 
 
