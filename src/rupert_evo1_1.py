@@ -18,11 +18,11 @@ from std_srvs.srv import Empty
 
 
 # global variables
-population_size = 32
+population_size = 64
 pop = []
 surv = []
 sco = []
-length = 128
+length = 256
 limit = 1.6
 xml_string = ''
 final_position = 0
@@ -35,7 +35,7 @@ rec_count = 0
 def create_individual(length):
 	individual = []
 	for i in range(length):
-		individual.append(random.randint(-8, 4))
+		individual.append(random.randint(-6, 6))
 	return individual
 
 def first_population(pop_size, length):
@@ -93,21 +93,19 @@ def fitness(guess):
 	for i in range(len(guess)):
 		if(i%8==0):
 			#print(i)
-			knee1.publish((guess[i]/8.0)*limit)
-			knee2.publish((guess[i+1]/8.0)*limit)
-			knee3.publish((guess[i+2]/8.0)*limit)
-			knee4.publish((guess[i+3]/8.0)*limit)
-			ankle1.publish(((guess[i+4]-4)/8.0)*limit)
-			ankle2.publish(((guess[i+5]-4)/8.0)*limit)
-			ankle3.publish(((guess[i+6]-4)/8.0)*limit)
-			ankle4.publish(((guess[i+7]-4)/8.0)*limit)
+			knee1.publish((guess[i]/6.0)*limit)
+			knee2.publish((guess[i+1]/6.0)*limit)
+			knee3.publish((guess[i+2]/6.0)*limit)
+			knee4.publish((guess[i+3]/6.0)*limit)
+			ankle1.publish(((guess[i+4])/6.0)*limit)
+			ankle2.publish(((guess[i+5])/6.0)*limit)
+			ankle3.publish(((guess[i+6])/6.0)*limit)
+			ankle4.publish(((guess[i+7])/6.0)*limit)
 			rospy.sleep(0.8)
-	performance = final_position-initial_position
-	if (final_position>5 and rec_count<2):
-		print("recheck")
-		rec_count = rec_count + 1
-		delete_model("rupert")
-		performance = fitness(guess)
+			
+	performance = final_position-initial_position + height_average/8
+
+
 	rec_count = 0
 	#unload_controllers()
 	delete_model("rupert")
@@ -134,18 +132,18 @@ def mate(individual1, individual2):
 	child2 = individual2[:index]+individual1[index:]
 	return child1, child2
 
-def mutate(radiation):
+def mutate(radiation1, radiation2):
 	global pop
 	global sco
-	for i in range(int(radiation*(population_size/2))):
+	for i in range(int(radiation1*(population_size/2))):
 		index = random.randint((population_size/2),(population_size-1))
 		print(index)
-		for j in range(int(radiation*length)):
+		for j in range(int(radiation2*length)):
 			index2 = random.randint(0,length-1)
 			specimen = pop[index]
 			begin = specimen[:index2]
 			end = specimen[index2+1:]
-			begin.append(random.randint(-8, 4))
+			begin.append(random.randint(-6, 6))
 			specimen = begin + end
 		print(specimen)
 		pop[index] = specimen
@@ -173,6 +171,7 @@ def main():
 	sco = []
 	pop = []
 	surv = []
+	running_fitness = []
 	generation = 0
 	load_controllers()
 	delete_model("rupert")
@@ -182,7 +181,7 @@ def main():
 		print("individual "+ str(i)+": "+str(score))
 		sco.append(score)
 	fit = np.array(sco)
-	while(generation<30):
+	while(generation<150):
 		generation += 1
 		print("generation: "+ str(generation))	
 		best_n(population_size/2, fit)
@@ -197,22 +196,28 @@ def main():
 				sco.append(fitness(child2))
 				print("individual "+ str(j+1)+": "+str(sco[-1]))
 		# change this to only mutate children
-		if generation<15:
-			mutate(0.4)
+		if generation<100:
+			mutate(0.6,0.4)
 		else:
-			mutate(0.2)
+			mutate(0.4,0.2)
 		fit = np.array(sco)
-		file = open("evolution_dist_gen"+str(generation)+".txt","w") 
+		running_fitness.append(np.max(fit))
+		file = open("evolution_1_gen"+str(generation)+".txt","w") 
 		file.write(str(pop))
 		file.write(str(sco))
 		file.close
-	file = open("evolution_dist_genf.txt","w") 
+	file = open("evolution_1_genf.txt","w") 
 	index_best = np.argmax(fit)
 	print(pop[index_best])
 	for i in range(len(pop)):
 		file.write(str(sco[i])+": ") 
 		file.write(str(pop[i]))
 		file.write("\n \n")
+	rospy.loginfo("Done")
+	file.close() 
+	file = open("evolution_1_fitness.txt","w") 
+	for i in range(len(running_fitness)):
+		file.write(str(running_fitness[i])+",") 
 	rospy.loginfo("Done")
 	file.close() 
 
