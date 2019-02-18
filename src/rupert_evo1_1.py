@@ -102,7 +102,7 @@ def fitness(guess):
 			ankle3.publish(((guess[i+6]-4)/8.0)*limit)
 			ankle4.publish(((guess[i+7]-4)/8.0)*limit)
 			rospy.sleep(0.8)
-	performance = final_position-initial_position + height_average/8
+	performance = final_position-initial_position
 	if (final_position>5 and rec_count<2):
 		print("recheck")
 		rec_count = rec_count + 1
@@ -202,11 +202,11 @@ def main():
 		else:
 			mutate(0.2)
 		fit = np.array(sco)
-		file = open("evolution_gen"+str(generation)+".txt","w") 
+		file = open("evolution_dist_gen"+str(generation)+".txt","w") 
 		file.write(str(pop))
 		file.write(str(sco))
 		file.close
-	file = open("evolution_genf.txt","w") 
+	file = open("evolution_dist_genf.txt","w") 
 	index_best = np.argmax(fit)
 	print(pop[index_best])
 	for i in range(len(pop)):
