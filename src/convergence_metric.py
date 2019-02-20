@@ -14,7 +14,7 @@ def main(run):
 	plot_score_temp = []
 	for i in range(generations):
 		gen = []
-		file = open("/home/msr/catkin_ws/src/rupert_learns/src/run"+str(run)+"/evolution_1_gen"+str(i+1)+".txt")
+		file = open("/home/jordan/catkin_ws/src/rupert_learns/src/run"+str(run)+"/evolution_1_gen"+str(i+1)+".txt")
 		text = file.read()
 		text = text.split("]]")
 		genes = text[0][1:]+']'

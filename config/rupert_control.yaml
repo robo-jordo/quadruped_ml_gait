@@ -1,3 +1,58 @@
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+joint1_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: knee_j1
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint2_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: knee_j2
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint3_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: knee_j3
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint4_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: knee_j4
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint5_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: hip_j1
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint6_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: hip_j2
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint7_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: hip_j3
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint8_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: hip_j4
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint9_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: ankle_j1
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint10_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: ankle_j2
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint11_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: ankle_j3
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+joint12_position_controller:
+  type: effort_controllers/JointPositionController
+  joint: ankle_j4
+  pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
 rupert:
   # Publish all joint states -----------------------------------
   joint_state_controller:
@@ -54,4 +109,510 @@ rupert:
     joint: ankle_j4
     pid: {p: 100.0, i: 0.01, d: 10.0}
 
+rupert0:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+rupert1:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+rupert2:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+rupert3:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+rupert4:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+rupert5:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+
+rupert6:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+rupert7:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+
+rupert8:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+
+  # Position Controllers ---------------------------------------
+  joint1_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint2_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint3_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint4_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: knee_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint5_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint6_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint7_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint8_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: hip_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint9_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j1
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint10_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j2
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint11_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j3
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  joint12_position_controller:
+    type: effort_controllers/JointPositionController
+    joint: ankle_j4
+    pid: {p: 100.0, i: 0.01, d: 10.0}
 
