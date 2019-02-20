@@ -387,7 +387,7 @@ def load_controllers(model_num):
 	rospy.wait_for_service('rupert'+str(model_num)+'/controller_manager/load_controller')
 	rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert'+str(model_num)+'/controller_manager/switch_controller')
-	controllers = ['joint_state_controller','/rupert'+str(model_num)+'/joint1_position_controller','/rupert'+str(model_num)+'/joint2_position_controller','/rupert'+str(model_num)+'/joint3_position_controller','/rupert'+str(model_num)+'/joint4_position_controller','/rupert'+str(model_num)+'/joint5_position_controller','/rupert'+str(model_num)+'/joint6_position_controller','/rupert'+str(model_num)+'/joint7_position_controller','/rupert'+str(model_num)+'/joint8_position_controller','/rupert'+str(model_num)+'/joint9_position_controller','/rupert'+str(model_num)+'/joint10_position_controller','/rupert'+str(model_num)+'/joint11_position_controller','/rupert'+str(model_num)+'/joint12_position_controller']
+	controllers = ['joint_state_controller','/one/rupert'+str(model_num)+'/one/joint1_position_controller','/one/rupert'+str(model_num)+'/joint2_position_controller','/rupert'+str(model_num)+'/joint3_position_controller','/one/rupert'+str(model_num)+'/one/joint4_position_controller','/one/rupert'+str(model_num)+'/one/joint5_position_controller','/one/rupert'+str(model_num)+'/joint6_position_controller','/one/rupert'+str(model_num)+'/joint7_position_controller','/one/rupert'+str(model_num)+'/joint8_position_controller','/one/rupert'+str(model_num)+'/joint9_position_controller','/one/rupert'+str(model_num)+'/joint10_position_controller','/one/rupert'+str(model_num)+'/joint11_position_controller','/one/rupert'+str(model_num)+'/joint12_position_controller']
 	for i in controllers:
 		print("HERE")
 		load_controller(i)
@@ -399,7 +399,7 @@ def unload_controllers():
 	rospy.wait_for_service('rupert'+str(model_num)+'/controller_manager/load_controller')
 	rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert'+str(model_num)+'/controller_manager/switch_controller')
-	controllers = ['joint_state_controller','/rupert'+str(model_num)+'/joint1_position_controller','/rupert'+str(model_num)+'/joint2_position_controller','/rupert'+str(model_num)+'/joint3_position_controller','/rupert'+str(model_num)+'/joint4_position_controller','/rupert'+str(model_num)+'/joint5_position_controller','/rupert'+str(model_num)+'/joint6_position_controller','/rupert'+str(model_num)+'/joint7_position_controller','/rupert'+str(model_num)+'/joint8_position_controller','/rupert'+str(model_num)+'/joint9_position_controller','/rupert'+str(model_num)+'/joint10_position_controller','/rupert'+str(model_num)+'/joint11_position_controller','/rupert'+str(model_num)+'/joint12_position_controller']
+	controllers = ['/one/joint_state_controller','/one/rupert'+str(model_num)+'/joint1_position_controller','/one/rupert'+str(model_num)+'/joint2_position_controller','/one/rupert'+str(model_num)+'/joint3_position_controller','/one/rupert'+str(model_num)+'/joint4_position_controller','/one/rupert'+str(model_num)+'/joint5_position_controller','/one/rupert'+str(model_num)+'/joint6_position_controller','/one/rupert'+str(model_num)+'/joint7_position_controller','/one/rupert'+str(model_num)+'/joint8_position_controller','/one/rupert'+str(model_num)+'/joint9_position_controller','/one/rupert'+str(model_num)+'/joint10_position_controller','/one/rupert'+str(model_num)+'/joint11_position_controller','/one/rupert'+str(model_num)+'/joint12_position_controller']
 	switch_controller([],controllers,2)
 	for i in controllers:
 		unload_controller(i)
