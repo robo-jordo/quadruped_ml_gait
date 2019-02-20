@@ -102,7 +102,9 @@ def fitness(guess):
 			ankle3.publish(((guess[i+6])/6.0)*limit)
 			ankle4.publish(((guess[i+7])/6.0)*limit)
 			rospy.sleep(0.8)
+			
 	performance = final_position-initial_position + height_average/8
+
 
 	rec_count = 0
 	#unload_controllers()
