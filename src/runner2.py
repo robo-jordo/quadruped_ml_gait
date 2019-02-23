@@ -16,9 +16,10 @@ from std_srvs.srv import Empty
 from controller_manager_msgs.srv import LoadController, UnloadController, SwitchController
 
 final_position = 0
-
-best = [2, -5, -5, -6, 4, -3, 4, 5, -5, 5, 5, 0, 6, -3, 1, 5, -6, -6, 3, -6, -1, -6, 6, -1, 0, 2, -4, -2, -6, 3, 0, 4, 3, 6, -5, -3, 2, -2, -4, 0, -3, -5, 6, -4, 4, 1, 4, 0, -2, -4, 2, -5, 1, -4, 0, -2, 2, -3, -1, -4, -5, 1, -6, 2, -5, 6, 6, -1, 0, 1, -1, 4, 1, -4, -5, 6, -2, -3, 5, 1, -1, 1, 3, 4, -3, -3, -1, -1, -2, -3, -5, -2, -2, -4, 4, 3, 0, -2, -6, -4, 5, -1, -4, 2, -3, 6, -5, -6, -3, 4, 2, 6, -1, -2, 3, -6, 1, -4, 5, 1, -4, -6, -4, -1, 3, -5, 6, -3, 4, -6, 2, -5, -3, -6, 2, -1, -2, -1, 5, -6, 4, -2, 2, -5, 1, -6, -3, -2, 1, 1, 1, -6, 6, -5, -6, 3, -3, 3, 4, -4, -2, -4, 6, -6, 4, -2, -6, -2, -3, -6, 2, 4, -5, -5, 6, -1, 6, 0, -6, 5, -3, -1, -5, -3, 4, 5, 1, 0, 5, 2, 6, 1, 4, 5, -3, 2, 3, 6, -6, 1, 2, -4, 5, 5, -1, 6, 3, -6, 2, 3, 2, 1, -6, 3, -6, -2, -5, -2, -1, -2, 2, -6, -4, -4, 5, 0, -4, -4, 1, -3, -4, -6, -3, 0, 6, 5, 2, -1, 1, -1, -1, -6, -5, -5, -5, 4, 3, 4, 3, 1, -5, 2, 4, 2, 0, 3]
+offset = [12, 6, 15]
+individual =[-5, 0, 3, -6, -3, -2, -5, 0, 5, 1, -5, -6, 6, 1, -1, -6, -5, -2, -5, -5, -4, -6, 6, 3, -2, -6, 6, 5, 2, 1, 4, -4]
 limit = 1.6
+length = len(individual)
 
 def callback(data):
 	global final_position 
@@ -27,32 +28,47 @@ def callback(data):
 
 
 def main():
+
 	load_controllers()
 	hip1.publish(0)
 	hip2.publish(0)
 	hip3.publish(0)
 	hip4.publish(0)
-	rospy.loginfo("START")
-	for j in range(5):
-		for i in range(len(best)/4):
-			if(i%8==0):
-				#print(i)
-				hip1.publish(0)
-				hip2.publish(0)
-				hip3.publish(0)
-				hip4.publish(0)
-				knee1.publish((best[i]/6.0)*limit)
-				knee2.publish((best[i+1]/6.0)*limit)
-				knee3.publish((best[i+2]/6.0)*limit)
-				knee4.publish((best[i+3]/6.0)*limit)
-				ankle1.publish((best[i+4]/6.0)*limit)
-				ankle2.publish((best[i+5]/6.0)*limit)
-				ankle3.publish((best[i+6]/6.0)*limit)
-				ankle4.publish((best[i+7]/6.0)*limit)
-				rospy.sleep(1)
-				rospy.loginfo("STARTING")
+	hip1.publish(0)
+	hip2.publish(0)
+	hip3.publish(0)
+	hip4.publish(0)
+	for j in range(10):
+		for i in range(len(individual)):
+			if(i%2==0):
+				print("here")
+				knee1.publish((individual[i]/6.0)*limit)
+				ankle1.publish((individual[i+1]/6.0)*limit)
+				if((i+offset[0]+1)<length):
+					print(1)
+					knee2.publish((individual[(i+offset[0])]/6.0)*limit)
+					ankle2.publish((individual[(i+offset[0]+1)]/6.0)*limit)
+				else:
+					print(2)
+					knee2.publish((individual[(i+offset[0]-length)]/6.0)*limit)
+					ankle2.publish((individual[(i+offset[0]+1-length)]/6.0)*limit)
+				if((i+offset[1]+1)<length):
+					knee3.publish((individual[(i+offset[1])]/6.0)*limit)
+					ankle3.publish((individual[(i+offset[1]+1)]/6.0)*limit)
+				else:
+					knee3.publish((individual[(i+offset[1]-length)]/6.0)*limit)
+					ankle3.publish((individual[(i+offset[1]+1-length)]/6.0)*limit)
+				if((i+offset[2]+1)<length):
+					knee4.publish((individual[(i+offset[2])]/6.0)*limit)
+					ankle4.publish((individual[(i+offset[2]+1)]/6.0)*limit)
+				else:
+					knee4.publish((individual[(i+offset[2]-length)]/6.0)*limit)
+					ankle4.publish((individual[(i+offset[2]+1-length)]/6.0)*limit)
+
+			rospy.sleep(0.8)
 	performance = final_position
-	
+
+
 def load_controllers():
 	rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert/controller_manager/load_controller')
@@ -90,15 +106,12 @@ if __name__=='__main__':
 	ankle3 = rospy.Publisher('/rupert/joint11_position_controller/command', Float64, queue_size=1)
 	ankle4 = rospy.Publisher('/rupert/joint12_position_controller/command', Float64, queue_size=1)
 	rospy.loginfo("STARTING")
-	
-			# maybe do some 'wait for service' here
+		
+		# maybe do some 'wait for service' here
 	delete_model = rospy.ServiceProxy("gazebo/delete_model", DeleteModel)
 	spawn_model = rospy.ServiceProxy("gazebo/spawn_urdf_model", SpawnModel)
 	reset_simulation = rospy.ServiceProxy('/gazebo/reset_world', Empty)
-	unload_controller = rospy.ServiceProxy('rupert/controller_manager/unload_controller', UnloadController)
-	load_controller = rospy.ServiceProxy('rupert/controller_manager/load_controller', LoadController)
-	switch_controller = rospy.ServiceProxy('rupert/controller_manager/switch_controller', SwitchController)
-	rospy.loginfo("STAR")
-		# maybe do some 'wait for service' here
-	reset_simulation = rospy.ServiceProxy('/gazebo/reset_world', Empty)
-	main()
+    unload_controller = rospy.ServiceProxy('rupert/controller_manager/unload_controller', UnloadController)
+    load_controller = rospy.ServiceProxy('rupert/controller_manager/load_controller', LoadController)
+    switch_controller = rospy.ServiceProxy('rupert/controller_manager/switch_controller', SwitchController)
+    main()
