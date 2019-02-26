@@ -127,7 +127,7 @@ def fitness(individual_given):
 				ankle4.publish((individual[(i+offset[2]+1-length)]/6.0)*limit)
 
 			rospy.sleep(0.8)
-	performance = final_position - initial_position + height_average
+	performance = final_position - initial_position + height_average/8
 	rec_count = 0
 	#unload_controllers()
 	delete_model("rupert")
@@ -152,12 +152,9 @@ def best_n(n, scores):
 		mid = np.mean(scores)
 		minimum = np.min(scores)
 		for j in range(population_size-i):
-			print(int(math.ceil((scores[j]-minimum)*10)))
 			weighted_random = weighted_random + ([j] * int(math.ceil((scores[j]-minimum)*10)))
-			print(weighted_random)
 		index = random.choice(weighted_random)
 		#print(weighted_random)
-		print(index)
 		#index = np.argmax(scores)
 		surv.append(pop[index])
 		sco.append(scores[index])
@@ -174,14 +171,18 @@ def mate(individual1, individual2):
 	individual2_string = individual2[0]
 	individual1_offset = individual1[1]
 	individual2_offset = individual2[1]
+	print(individual1)
+	print(individual2)
 	index = random.randint(0, len(individual1_string)-1)
-	index = random.randint(0, 3)
+	index2 = random.randint(0, 3)
 	child1_string = individual1_string[:index]+individual2_string[index:]
 	child2_string = individual2_string[:index]+individual1_string[index:]
-	child1_offset = individual1_string[:index]+individual2_string[index:]
-	child2_offset = individual2_string[:index]+individual1_string[index:]
+	child1_offset = individual1_offset[:index2]+individual2_offset[index2:]
+	child2_offset = individual2_offset[:index2]+individual1_offset[index2:]
 	child1 = [child1_string,child1_offset]
 	child2 = [child2_string,child2_offset]
+	print("child:"+str(child1))
+	print("child:"+str(child2))
 	return child1, child2
 
 def mutate(radiation1, radiation2):
@@ -189,10 +190,9 @@ def mutate(radiation1, radiation2):
 	global sco
 	global hei
 	global dis
-	new_offsets = []
 	for i in range(int(radiation1*(population_size))):
+		new_offsets = []
 		index = random.randint(0,(population_size-1))
-		print(index)
 		for j in range(int(radiation2*length)):
 			index2 = random.randint(0,length-1)
 			specimen = pop[index][0]
@@ -200,11 +200,11 @@ def mutate(radiation1, radiation2):
 			end = specimen[index2+1:]
 			begin.append(random.randint(-6, 6))
 			specimen = begin + end
-			print(specimen)
+		print(specimen)
 		for k in range(3):
 			new_offsets.append(random.randint(0, length))
 		new_specimen = [specimen,new_offsets] 
-		print(specimen)
+		print("mutt:"+str(new_specimen))
 		pop[index] = new_specimen
 		sco[index],dis[index],hei[index] = fitness(pop[index])
 
@@ -290,7 +290,7 @@ def main():
 		file.close
 	file = open("evolution_1_genf.txt","w") 
 	index_best = np.argmax(fit)
-	print(pop[index_best])
+	
 	for i in range(len(pop)):
 		file.write(str(sco[i])+": ") 
 		file.write(str(pop[i]))

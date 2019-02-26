@@ -16,8 +16,9 @@ from std_srvs.srv import Empty
 from controller_manager_msgs.srv import LoadController, UnloadController, SwitchController
 
 final_position = 0
-offset = [12, 6, 15]
-individual =[-5, 0, 3, -6, -3, -2, -5, 0, 5, 1, -5, -6, 6, 1, -1, -6, -5, -2, -5, -5, -4, -6, 6, 3, -2, -6, 6, 5, 2, 1, 4, -4]
+
+offset =  [14, 24, 15]
+individual =[0, 1, -3, 5, -3, 1, -6, -2, 3, 3, -5, 2, 5, 6, -3, -6, -4, -3, 5, 4, 3, 3, -5, -4, 3, -1, 2, 1, 5, -2, 2, -2]
 limit = 1.6
 length = len(individual)
 
@@ -42,6 +43,10 @@ def main():
 		for i in range(len(individual)):
 			if(i%2==0):
 				print("here")
+				hip1.publish(-0.707)
+				hip2.publish(0.707)
+				hip3.publish(0.707)
+				hip4.publish(-0.707)
 				knee1.publish((individual[i]/6.0)*limit)
 				ankle1.publish((individual[i+1]/6.0)*limit)
 				if((i+offset[0]+1)<length):
@@ -111,7 +116,7 @@ if __name__=='__main__':
 	delete_model = rospy.ServiceProxy("gazebo/delete_model", DeleteModel)
 	spawn_model = rospy.ServiceProxy("gazebo/spawn_urdf_model", SpawnModel)
 	reset_simulation = rospy.ServiceProxy('/gazebo/reset_world', Empty)
-    unload_controller = rospy.ServiceProxy('rupert/controller_manager/unload_controller', UnloadController)
-    load_controller = rospy.ServiceProxy('rupert/controller_manager/load_controller', LoadController)
-    switch_controller = rospy.ServiceProxy('rupert/controller_manager/switch_controller', SwitchController)
-    main()
+	unload_controller = rospy.ServiceProxy('rupert/controller_manager/unload_controller', UnloadController)
+	load_controller = rospy.ServiceProxy('rupert/controller_manager/load_controller', LoadController)
+	switch_controller = rospy.ServiceProxy('rupert/controller_manager/switch_controller', SwitchController)
+	main()
