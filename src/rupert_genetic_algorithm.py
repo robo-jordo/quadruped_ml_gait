@@ -29,6 +29,8 @@ phased_gait = False
 static_hip = True
 bias = True
 probabilistic_cull = True
+generations = 150
+switch_mutation_gen = 100
 
 
 ## Structures and constants
@@ -348,7 +350,7 @@ def main():
 	dist_arr = np.array(dis)
 	unfit_count.append(num_unfit)
 	num_unfit = 0
-	while(generation<150):
+	while(generation<generations):
 		generation += 1
 		print("generation: "+ str(generation))	
 		best_n(population_size/2, fit)
@@ -383,7 +385,7 @@ def main():
 				dis.append(distance_temp)
 				print("individual "+ str(j+1)+": "+str(sco[-1]))
 		# change this to only mutate children
-		if generation<100:
+		if generation<switch_mutation_gen:
 			mutate(0.4,0.5)
 		else:
 			mutate(0.4,0.3)
@@ -396,15 +398,21 @@ def main():
 		running_height.append(np.max(height_arr))
 		running_dist.append(np.max(dist_arr))
 		file = open("evolution_1_gen"+str(generation)+".txt","w") 
-		file.write(str(pop))
-		file.write(str(sco))
+		for i in range(len(pop)):
+			file.write(str(sco[i])+": ")
+			file.write(str(pop[i]))
+			file.write("\n \n")
 		file.close
 		file = open("evolution_invalids.txt","w") 
 		file.write(str(unfit_count))
 		file.close
+		file = open("evolution_1_fitness.txt","w") 
+		for i in range(len(running_fitness)):
+			file.write(str(running_fitness[i])+",") 
+		rospy.loginfo("Done")
+		file.close()
 	file = open("evolution_1_genf.txt","w") 
 	index_best = np.argmax(fit)
-	
 	for i in range(len(pop)):
 		file.write(str(sco[i])+": ") 
 		file.write(str(pop[i]))
