@@ -21,7 +21,7 @@ from std_srvs.srv import Empty
 
 # global variables
 ## Defaults
-population_size = 8
+population_size = 4
 length = 128
 limit = 1.6
 hip_position = 0
@@ -134,7 +134,6 @@ def fitness(individual_given):
 		offset = individual_given[1]
 	else:
 		individual = individual_given
-	print(individual)
 	for i in range(len(individual)):
 		if (static_hip == True):
 			wrap = 8
@@ -267,12 +266,16 @@ def mutate(radiation1, radiation2):
 	for i in range(int(radiation1*(population_size))):
 		new_offsets = []
 		index = random.randint(0,(population_size-1))
+		print(pop[index])
 		for j in range(int(radiation2*length)):
 			index2 = random.randint(0,length-1)
-			if(phased_gait == True):
-				specimen = pop[index][0]
+			if j == 0:
+				if(phased_gait == True):
+					specimen = pop[index][0]
+				else:
+					specimen = pop[index]
 			else:
-				specimen = pop[index]
+				specimen = new_specimen
 			begin = specimen[:index2]
 			end = specimen[index2+1:]
 			if(bias==True):
@@ -284,7 +287,7 @@ def mutate(radiation1, radiation2):
 			for k in range(3):
 				new_offsets.append(random.randint(0, length))
 			new_specimen = [specimen,new_offsets] 
-		print("mutt:"+str(new_specimen))
+		print(new_specimen)
 		pop[index] = new_specimen
 		sco[index],dis[index],hei[index] = fitness(pop[index])
 
