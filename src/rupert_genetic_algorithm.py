@@ -21,16 +21,16 @@ from std_srvs.srv import Empty
 
 # global variables
 ## Defaults
-population_size = 64
-length = 32
+population_size = 8
+length = 128
 limit = 1.6
 hip_position = 0
 phased_gait = False
 static_hip = True
 bias = True
 probabilistic_cull = True
-generations = 150
-switch_mutation_gen = 100
+generations = 20
+switch_mutation_gen = 10
 
 
 ## Structures and constants
@@ -42,7 +42,7 @@ dis = []
 xml_string = ''
 final_position = 0
 initial_position = 0
-height_count = 0
+height_count = 1
 height_average = 0
 pitch_average = 0
 roll_average = 0
@@ -58,13 +58,16 @@ def create_individual(length):
 	offsets = []
 	for i in range(length):
 		if (bias ==True):
-			individual_string.append(random.randint(-6, 6))
+			individual_string.append(random.randint(-8, 4))
 		else:
-			individual.append(random.randint(-8, 4))
+			individual_string.append(random.randint(-6, 6))
+
 	if (phased_gait == True):
 		for i in range(3):
 			offsets.append(random.randint(0, length))
 		individual = [individual_string, offsets]
+	else:
+		individual = individual_string
 	return individual
 
 def first_population(pop_size, length):
@@ -102,7 +105,7 @@ def fitness(individual_given):
 	hip2.publish(0)
 	hip3.publish(0)
 	hip4.publish(0)
-
+	
 	p = os.popen("rosrun xacro xacro.py " + "~/catkin_ws/src/rupert_learns/urdf/rupert.xacro")
 	xml_string = p.read()
 	p.close()
@@ -111,33 +114,35 @@ def fitness(individual_given):
 	try:
 		load_controllers()
 	except:
-        try:
-		    delete_model("rupert")
-        except:
-		    rospy.sleep(2)
-            try:
-		        spawn_model("rupert")
-            except: 
-                pass
+		print("problem")
+		try:
+			delete_model("rupert")
+		except:
+			rospy.sleep(2)
+			try:
+				spawn_model("rupert")
+			except: 
+				print("issue")
 		load_controllers()
 
 	height_average = 0
 	pitch_average = 0
 	roll_average = 0
-	height_count = 0
-    if (phased_gait == True):
-	    individual = individual_given[0]
-	    offset = individual_given[1]
+	height_count = 1
+	if (phased_gait == True):
+		individual = individual_given[0]
+		offset = individual_given[1]
 	else:
 		individual = individual_given
+	print(individual)
 	for i in range(len(individual)):
-        if (static_hip == True):
+		if (static_hip == True):
 			wrap = 8
 			hip_offset = 0
-		    hip1.publish(hip_position)
-		    hip2.publish(hip_position)
-		    hip3.publish(hip_position)
-		    hip4.publish(hip_position)
+			hip1.publish(hip_position)
+			hip2.publish(hip_position)
+			hip3.publish(hip_position)
+			hip4.publish(hip_position)
 		else:
 			hip1.publish((individual[i]/bias_div)*limit)
 			hip2.publish((individual[i+1]/bias_div)*limit)
@@ -150,7 +155,7 @@ def fitness(individual_given):
 			unfit = False
 			delete_model("rupert")
 			return performance, 0 ,0
-        if (phased_gait==True):
+		if (phased_gait==True):
 			if(i%2==0):
 				knee1.publish((individual[i]/bias_div)*limit)
 				ankle1.publish((individual[i+1]/bias_div)*limit)
@@ -182,8 +187,7 @@ def fitness(individual_given):
 				ankle2.publish(((individual[i+hip_offset+5])/bias_div)*limit)
 				ankle3.publish(((individual[i+hip_offset+6])/bias_div)*limit)
 				ankle4.publish(((individual[i+hip_offset+7])/bias_div)*limit)
-
-		rospy.sleep(1)
+		rospy.sleep(0.1)
 	performance = final_position - initial_position + height_average/height_count - roll_average/height_count - pitch_average/height_count
 	rec_count = 0
 	delete_model("rupert")
@@ -207,7 +211,7 @@ def best_n(n, scores):
 	dis = [] 
 	local_count = 0
 	for i in range(n):
-		if(probabilistic_cull = True):
+		if(probabilistic_cull == True):
 			weighted_random = []
 			mid = np.mean(scores)
 			minimum = np.min(scores)
