@@ -28,6 +28,7 @@ hip_position = 0
 phased_gait = False
 static_hip = True
 bias = True
+probabilistic_cull = True
 
 
 ## Structures and constants
@@ -204,20 +205,31 @@ def best_n(n, scores):
 	dis = [] 
 	local_count = 0
 	for i in range(n):
-		weighted_random = []
-		mid = np.mean(scores)
-		minimum = np.min(scores)
-		for j in range(population_size-i):
-			weighted_random = weighted_random + ([j] * int(math.ceil((scores[j]-minimum)*10)))
-		index = random.choice(weighted_random)
-		surv.append(pop[index])
-		sco.append(scores[index])
-		hei.append(hei2[index])
-		dis.append(dis2[index])
-		pop.pop(index)
-		scores = np.delete(scores, index)
-		hei2.pop(index)
-		dis2.pop(index)
+		if(probabilistic_cull = True):
+			weighted_random = []
+			mid = np.mean(scores)
+			minimum = np.min(scores)
+			for j in range(population_size-i):
+				weighted_random = weighted_random + ([j] * int(math.ceil((scores[j]-minimum)*10)))
+			index = random.choice(weighted_random)
+			surv.append(pop[index])
+			sco.append(scores[index])
+			hei.append(hei2[index])
+			dis.append(dis2[index])
+			pop.pop(index)
+			scores = np.delete(scores, index)
+			hei2.pop(index)
+			dis2.pop(index)
+		else:
+			index = np.argmax(scores)
+			surv.append(pop[index])
+			sco.append(scores[index])
+			hei.append(hei2[index])
+			dis.append(dis2[index])
+			pop.pop(index)
+			scores = np.delete(scores, index)
+			hei2.pop(index)
+			dis2.pop(index)
 	pop = surv
 
 def mate(individual1, individual2):
