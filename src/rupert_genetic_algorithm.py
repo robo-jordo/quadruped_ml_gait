@@ -233,22 +233,24 @@ def best_n(n, scores):
 	pop = surv
 
 def mate(individual1, individual2):
-	individual1_string = individual1[0]
-	individual2_string = individual2[0]
-	individual1_offset = individual1[1]
-	individual2_offset = individual2[1]
-	#print(individual1)
-	#print(individual2)
-	index = random.randint(0, len(individual1_string)-1)
-	index2 = random.randint(0, 3)
-	child1_string = individual1_string[:index]+individual2_string[index:]
-	child2_string = individual2_string[:index]+individual1_string[index:]
-	child1_offset = individual1_offset[:index2]+individual2_offset[index2:]
-	child2_offset = individual2_offset[:index2]+individual1_offset[index2:]
-	child1 = [child1_string,child1_offset]
-	child2 = [child2_string,child2_offset]
-	#print("child:"+str(child1))
-	#print("child:"+str(child2))
+	if (phased_gait == True):
+		individual1_string = individual1[0]
+		individual2_string = individual2[0]
+		individual1_offset = individual1[1]
+		individual2_offset = individual2[1]
+
+		index = random.randint(0, len(individual1_string)-1)
+		index2 = random.randint(0, 3)
+		child1_string = individual1_string[:index]+individual2_string[index:]
+		child2_string = individual2_string[:index]+individual1_string[index:]
+		child1_offset = individual1_offset[:index2]+individual2_offset[index2:]
+		child2_offset = individual2_offset[:index2]+individual1_offset[index2:]
+		child1 = [child1_string,child1_offset]
+		child2 = [child2_string,child2_offset]
+	else:
+		index = random.randint(0, len(individual1)-1)
+		child1 = individual1[:index]+individual2[index:]
+		child2 = individual2[:index]+individual1[index:]
 	return child1, child2
 
 def mutate(radiation1, radiation2):
@@ -261,15 +263,21 @@ def mutate(radiation1, radiation2):
 		index = random.randint(0,(population_size-1))
 		for j in range(int(radiation2*length)):
 			index2 = random.randint(0,length-1)
-			specimen = pop[index][0]
+			if(phased_gait == True):
+				specimen = pop[index][0]
+			else:
+				specimen = pop[index]
 			begin = specimen[:index2]
 			end = specimen[index2+1:]
-			begin.append(random.randint(-6, 6))
-			specimen = begin + end
-		print(specimen)
-		for k in range(3):
-			new_offsets.append(random.randint(0, length))
-		new_specimen = [specimen,new_offsets] 
+			if(bias==True):
+				begin.append(random.randint(-8, 4))
+			else:
+				begin.append(random.randint(-6, 6))
+			new_specimen = begin + end
+		if (phased_gait == True):
+			for k in range(3):
+				new_offsets.append(random.randint(0, length))
+			new_specimen = [specimen,new_offsets] 
 		print("mutt:"+str(new_specimen))
 		pop[index] = new_specimen
 		sco[index],dis[index],hei[index] = fitness(pop[index])
