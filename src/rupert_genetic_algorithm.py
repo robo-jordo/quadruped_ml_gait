@@ -21,16 +21,16 @@ from std_srvs.srv import Empty
 
 # global variables
 ## Defaults
-population_size = 4
+population_size = 64
 length = 128
 limit = 1.6
 hip_position = 0
 phased_gait = False
 static_hip = True
 bias = True
-probabilistic_cull = True
-generations = 20
-switch_mutation_gen = 10
+probabilistic_cull = False
+generations = 150
+switch_mutation_gen = 100
 
 
 ## Structures and constants
@@ -106,24 +106,22 @@ def fitness(individual_given):
 	hip3.publish(0)
 	hip4.publish(0)
 	
-	p = os.popen("rosrun xacro xacro.py " + "~/catkin_ws/src/rupert_learns/urdf/rupert.xacro")
-	xml_string = p.read()
-	p.close()
-	
 	spawn_model("rupert",xml_string,"",pose,"world")
 	try:
 		load_controllers()
 	except:
 		print("problem")
 		try:
+			unload_controllers()
 			delete_model("rupert")
 		except:
 			rospy.sleep(2)
-			try:
-				spawn_model("rupert")
-			except: 
-				print("issue")
+	try:
+		spawn_model("rupert")
+		rospy.sleep(2)
 		load_controllers()
+	except: 
+		print("issue")
 
 	height_average = 0
 	pitch_average = 0
@@ -152,7 +150,15 @@ def fitness(individual_given):
 		if (unfit == True):
 			performance = -1000
 			unfit = False
-			delete_model("rupert")
+			unload_controllers()
+			try:
+				delete_model("rupert")
+			except:
+				rospy.sleep(1)
+				try:
+					delete_model("rupert")
+				except:
+					pass
 			return performance, 0 ,0
 		if (phased_gait==True):
 			if(i%2==0):
@@ -186,10 +192,18 @@ def fitness(individual_given):
 				ankle2.publish(((individual[i+hip_offset+5])/bias_div)*limit)
 				ankle3.publish(((individual[i+hip_offset+6])/bias_div)*limit)
 				ankle4.publish(((individual[i+hip_offset+7])/bias_div)*limit)
-		rospy.sleep(0.1)
+		rospy.sleep(0.2)
 	performance = final_position - initial_position + height_average/height_count - roll_average/height_count - pitch_average/height_count
 	rec_count = 0
-	delete_model("rupert")
+	unload_controllers()
+	try:	
+		delete_model("rupert")
+	except:
+		rospy.sleep(1)
+		try:
+			delete_model("rupert")
+		except:
+			pass
 	if (unfit == True):
 		performance = -1000
 		unfit = False
@@ -266,7 +280,6 @@ def mutate(radiation1, radiation2):
 	for i in range(int(radiation1*(population_size))):
 		new_offsets = []
 		index = random.randint(0,(population_size-1))
-		print(pop[index])
 		for j in range(int(radiation2*length)):
 			index2 = random.randint(0,length-1)
 			if j == 0:
@@ -287,7 +300,6 @@ def mutate(radiation1, radiation2):
 			for k in range(3):
 				new_offsets.append(random.randint(0, length))
 			new_specimen = [specimen,new_offsets] 
-		print(new_specimen)
 		pop[index] = new_specimen
 		sco[index],dis[index],hei[index] = fitness(pop[index])
 
@@ -338,7 +350,7 @@ def main():
 	running_height = []
 	running_dist = []
 	generation = 0
-	load_controllers()
+	unload_controllers()
 	delete_model("rupert")
 	first_population(population_size,length)
 	for i in range(population_size):
@@ -393,9 +405,9 @@ def main():
 				print("individual "+ str(j+1)+": "+str(sco[-1]))
 		# change this to only mutate children
 		if generation<switch_mutation_gen:
-			mutate(0.4,0.5)
+			mutate(0.3,0.5)
 		else:
-			mutate(0.4,0.3)
+			mutate(0.2,0.3)
 		unfit_count.append(num_unfit)
 		num_unfit = 0
 		fit = np.array(sco)
@@ -416,7 +428,7 @@ def main():
 		file = open("evolution_1_fitness.txt","w") 
 		for i in range(len(running_fitness)):
 			file.write(str(running_fitness[i])+",") 
-		rospy.loginfo("Done")
+		#rospy.loginfo("Done")
 		file.close()
 	file = open("evolution_1_genf.txt","w") 
 	index_best = np.argmax(fit)
@@ -445,9 +457,9 @@ def main():
 # 		running_total = running_total+1
 # print(running_total)
 def load_controllers():
-	rospy.loginfo("STARTING")
+	#rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert/controller_manager/load_controller')
-	rospy.loginfo("STARTING")
+	#rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert/controller_manager/switch_controller')
 	controllers = ['joint_state_controller','/rupert/joint1_position_controller','/rupert/joint2_position_controller','/rupert/joint3_position_controller','/rupert/joint4_position_controller','/rupert/joint5_position_controller','/rupert/joint6_position_controller','/rupert/joint7_position_controller','/rupert/joint8_position_controller','/rupert/joint9_position_controller','/rupert/joint10_position_controller','/rupert/joint11_position_controller','/rupert/joint12_position_controller']
 	for i in controllers:
@@ -456,9 +468,9 @@ def load_controllers():
 	switch_controller(controllers,[],2)
 
 def unload_controllers():
-	rospy.loginfo("STARTING")
+	#rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert/controller_manager/load_controller')
-	rospy.loginfo("STARTING")
+	#rospy.loginfo("STARTING")
 	rospy.wait_for_service('rupert/controller_manager/switch_controller')
 	controllers = ['joint_state_controller','/rupert/joint1_position_controller','/rupert/joint2_position_controller','/rupert/joint3_position_controller','/rupert/joint4_position_controller','/rupert/joint5_position_controller','/rupert/joint6_position_controller','/rupert/joint7_position_controller','/rupert/joint8_position_controller','/rupert/joint9_position_controller','/rupert/joint10_position_controller','/rupert/joint11_position_controller','/rupert/joint12_position_controller']
 	switch_controller([],controllers,2)
@@ -500,7 +512,10 @@ if __name__=='__main__':
 	unload_controller = rospy.ServiceProxy('rupert/controller_manager/unload_controller', UnloadController)
 	load_controller = rospy.ServiceProxy('rupert/controller_manager/load_controller', LoadController)
 	switch_controller = rospy.ServiceProxy('rupert/controller_manager/switch_controller', SwitchController)
-	
+		
+	p = os.popen("rosrun xacro xacro.py " + "~/catkin_ws/src/rupert_learns/urdf/rupert.xacro")
+	xml_string = p.read()
+	p.close()
 	
 	if (bias == True):
 		bias_div = 8.0
