@@ -28,7 +28,7 @@ hip_position = 0
 phased_gait = False
 static_hip = True
 bias = True
-probabilistic_cull = False
+probabilistic_cull = True
 generations = 150
 switch_mutation_gen = 100
 

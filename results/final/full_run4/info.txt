@@ -1,0 +1,7 @@
+full run 4
+64 Individuals
+150 generations
+switch mutation at 100
+keep top 32 in cull (not probabilistic)
+hips static
+legs not biased downwards
