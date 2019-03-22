@@ -24,12 +24,19 @@ There are two different Docker containers that can be found in this repo :
 ##### Running the Docker conatiners
 In order to build and run the Docker conatiners you will need to download the contents of the [Docker](/Docker) directory.
 This directory then contains two sub directories:
-* [Standard](/Docker/Standard): Linux computers without GPU/Nvidia drivers
-* [Nvidia](/Docker/Nvidia): Linux computers with a Nvidia GPU driver
+* [Standard_docker](/Docker/Standard_docker): Linux computers without GPU/Nvidia drivers
+* [Nvidia_docker](/Docker/Nvidia_docker): Linux computers with a Nvidia GPU driver
 
 You will need to pick the appropriate container for your system.
 
 Building the container:
+``
+In order to run the docker file with the correct parameters each directory has a bash script that can be run.
+Running the conatiner:
+``
+
+Opening a second terminal in the already running conatiner
+``
 
 ### Built with
 
