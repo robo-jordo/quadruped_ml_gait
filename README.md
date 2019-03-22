@@ -9,6 +9,8 @@ This project was developed by me as a winter project credit while completing a M
 The project aims to blend an interest in machine learning with real world robots. This is acheived through setting up a simulation environment that allows for training of machine learning models for robots in simulation.
 
 ## Screenshots
+![alt text](/img/rupert.png "3D printed model")
+![alt text](/img/rupert_sim.png "Simulated model")
 
 ## Contents of the repository
 
