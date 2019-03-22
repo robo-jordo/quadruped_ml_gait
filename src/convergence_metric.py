@@ -14,7 +14,7 @@ def main(run):
 	plot_score_temp = []
 	for i in range(generations):
 		gen = []
-		file = open("/home/jordan/catkin_ws/src/rupert_learns/src/run"+str(run)+"/evolution_1_gen"+str(i+1)+".txt")
+		file = open("/home/jordan/catkin_ws/src/rupert_learns/src/full_run_"+str(run)+"/evolution_1_gen"+str(i+1)+".txt")
 		text = file.read()
 		text = text.split("]]")
 		genes = text[0][1:]+']'
@@ -48,16 +48,9 @@ def dist(generation):
 				convergence_metric = convergence_metric + dist
 	return convergence_metric/(math.factorial(len(generation)))
 
-main(1)
+
 main(2)
-main(3)
-main(4)
-main(5)
 plt.plot(plot_score[0],label='1')
-plt.plot(plot_score[1],label='2')
-plt.plot(plot_score[2],label='3')
-plt.plot(plot_score[3],label='4')
-plt.plot(plot_score[4],label='5')
 plt.legend()
 plt.show()
 
