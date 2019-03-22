@@ -30,13 +30,17 @@ This directory then contains two sub directories:
 You will need to pick the appropriate container for your system.
 
 Building the container:
-``
+ensure you are in either the Standard_docker directory or the Nvidia_docker directory.
+`$ sudo Docker build -t rupert_full .`
 In order to run the docker file with the correct parameters each directory has a bash script that can be run.
+
 Running the conatiner:
-``
+`$ sudo ./docker rupert.bash`
+
+Note: If you have named the conatiner something other than rupert_full when building you will have to change the `rupert.bash` file to reflect this change.
 
 Opening a second terminal in the already running conatiner
-``
+`$ sudo docker exec -it <container_name> /bin/bash`
 
 ### Built with
 
