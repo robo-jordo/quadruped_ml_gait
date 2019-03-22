@@ -15,6 +15,8 @@ The project aims to blend an interest in machine learning with real world robots
 In order to run this project without having to install ROS and the the dependancies and packages required a docker container has been developed.
 
 #### Docker
+------
+##### Requirements
 To use this project with the Docker conatiner you will need Docker installed on [Linux](https://docs.docker.com/get-started/).
 
 There are two different Docker containers that can be found in this repo :
@@ -22,6 +24,7 @@ There are two different Docker containers that can be found in this repo :
 * Linux machine with Nvidia drivers
 
 ##### Running the Docker conatiners
+
 In order to build and run the Docker conatiners you will need to download the contents of the [Docker](/Docker) directory.
 This directory then contains two sub directories:
 * [Standard_docker](/Docker/Standard_docker): Linux computers without GPU/Nvidia drivers
@@ -47,9 +50,26 @@ Opening a second terminal in the already running conatiner
 
 `$ sudo docker exec -it <container_name> /bin/bash`
 
-### Built with
+#### Standard (without Docker)
+------
+##### Requirements
+This method requires:
+*[Linux Ubuntu 18.04](https://www.ubuntu.com/download/desktop)
+*[Ros Melodic](http://wiki.ros.org/melodic)-Full installation
+Package dependancies:
+[gazebo_ros_demos](https://github.com/ros-simulation/gazebo_ros_demos.git)
 
-### Running the Docker conatiner
+Install ros dependancies:
+
+*`$ sudo apt-get install ros-melodic-gazebo-ros-pkgs ros-melodic-gazebo-ros-control`
+
+*`$ apt-get install ros-melodic-ros-control ros-melodic-ros-controllers`
+
+### Built with
+*[Linux Ubuntu 18.04](https://www.ubuntu.com/download/desktop)
+*[Ros Melodic](http://wiki.ros.org/melodic)
+*[Docker](https://docs.docker.com/get-started/)
+
 
 ## Using the framework
 
