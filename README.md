@@ -30,7 +30,8 @@ This directory then contains two sub directories:
 You will need to pick the appropriate container for your system.
 
 Building the container:
-ensure you are in either the Standard_docker directory or the Nvidia_docker directory.
+
+**Ensure you are in either the Standard_docker directory or the Nvidia_docker directory.**
 
 `$ sudo Docker build -t rupert_full .`
 
