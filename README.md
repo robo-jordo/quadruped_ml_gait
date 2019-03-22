@@ -10,7 +10,7 @@ The project aims to blend an interest in machine learning with real world robots
 
 ## Screenshots
 ![alt text](/img/rupert.png "3D printed model") ![alt text](/img/rupert_sim.png "Simulated model")
-
+<img src="/img/rupert.png" width="300"/> <img src="/img/rupert_sim.png" width="300"/>
 ## Contents of the repository
 
 ## Getting started
