@@ -45,13 +45,13 @@ Building the container:
 
 **Ensure you are in either the Standard_docker directory or the Nvidia_docker directory.**
 
-`$ sudo Docker build -t rupert_full .`
+`$ sudo docker build -t <CONTAINER_NAME> .`
 
 In order to run the docker file with the correct parameters each directory has a bash script that can be run.
 
 Running the conatiner:
 
-`$ sudo ./docker rupert.bash`
+`$ sudo ./rupert.bash <CONTAINER_NAME>`
 
 At this point you can move forward to the 'Using the framework part'.
 
@@ -60,7 +60,11 @@ Note: If you have named the conatiner something other than rupert_full when buil
 
 Opening a second terminal in the already running conatiner
 
-`$ sudo docker exec -it <container_name> /bin/bash`
+`$ sudo docker exec -it <CONTAINER_ID> /bin/bash`
+
+If you are not familiar with Docker the countainer ID can be found with:
+
+`$ sudo docker ps -a`
 
 #### 2) Standard (without Docker)
 ------
