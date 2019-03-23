@@ -1,6 +1,6 @@
 # Rupert learns to walk
 
-This project aims to use machine learning to train a quadrupedal robot to walk. The machine learning is done in simulation using ROS and gazebo. Once the gait is learned it is implemented on a physical 3D printed quadruped that is actuated using hobby servo motors.
+This project aims to use machine learning to train a quadrupedal robot to walk. The machine learning is done in simulation using ROS and gazebo. Once the gait is learned it is implemented on a physical 3D printed quadruped that is actuated using hobby servo motors. The model I used can be found on thingiverse. ............
 
 This project focused on an implemnetation of evolutionary algorithms in order to have a robot learn a gait. However the underlying framework that has been set up to acheive this can be used for many other applications in machine learning that uses simulation.
 
@@ -9,12 +9,21 @@ This project was developed by me as a winter project credit while completing a M
 The project aims to blend an interest in machine learning with real world robots. This is acheived through setting up a simulation environment that allows for training of machine learning models for robots in simulation.
 
 ## Screenshots
+<img src="/img/rupert.png" width="300" title="3D printed robot"/> <img src="/img/rupert_sim.png" width="325" title="Simulated robot"/> 
+
+3D printed robot and simulated model.
+
+## Contents of the repository
 
 ## Getting started
 ### Pre requisites and variations
-In order to run this project without having to install ROS and the the dependancies and packages required a docker container has been developed.
+There are two ways to run this project.
+1) Docker 
+2) Standard set up
 
-#### Docker
+In order to run this project without having to install ROS and the the dependancies and packages required a docker container has been developed. this is the reccomended way to run this project.
+
+#### 1) Docker
 ------
 ##### Requirements
 To use this project with the Docker conatiner you will need Docker installed on [Linux](https://docs.docker.com/get-started/).
@@ -44,13 +53,16 @@ Running the conatiner:
 
 `$ sudo ./docker rupert.bash`
 
+At this point you can move forward to the 'Using the framework part'.
+
 Note: If you have named the conatiner something other than rupert_full when building you will have to change the `rupert.bash` file to reflect this change.
+
 
 Opening a second terminal in the already running conatiner
 
 `$ sudo docker exec -it <container_name> /bin/bash`
 
-#### Standard (without Docker)
+#### 2) Standard (without Docker)
 ------
 ##### Requirements
 This method requires:
@@ -65,11 +77,12 @@ Install ros dependancies:
 
 *`$ apt-get install ros-melodic-ros-control ros-melodic-ros-controllers`
 
+You may then clone this repository into a catkin workspace and move forward to using the framework.
+
 ### Built with
 *[Linux Ubuntu 18.04](https://www.ubuntu.com/download/desktop)
 *[Ros Melodic](http://wiki.ros.org/melodic)
 *[Docker](https://docs.docker.com/get-started/)
-
 
 ## Using the framework
 
