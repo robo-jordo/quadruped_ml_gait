@@ -13,7 +13,19 @@ The project aims to blend an interest in machine learning with real world robots
 
 3D printed robot and simulated model.
 
-## Contents of the repository
+# Hardware
+The 3D printed robot implementation requires the following:
+(The list below includes links to the parts that I used but these are not the only brands/versions you can use)
+
+* [A raspberry pi (with wifi preferable)](https://www.adafruit.com/product/3400?gclid=Cj0KCQjwj9LkBRDnARIsAGQ-hUfIZYtoOYLLxSevxvEEWEcyh0tR7AQC6zUDJ8yODH_rBnLPEvK9hW8aAncFEALw_wcB)
+* [A servo driver](https://www.sparkfun.com/products/14328)
+* [Batteries](https://www.amazon.com/Floureon-1500mAh-Battery-m4-fpv250-Shredder/dp/B00SGYXD4M/ref=asc_df_B00SGYXD4M/?tag=hyprod-20&linkCode=df0&hvadid=312039856506&hvpos=1o4&hvnetw=g&hvrand=534954249629846417&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9021564&hvtargid=pla-648678196229&psc=1&tag=&ref=&adgrpid=68991967824&hvpone=&hvptwo=&hvadid=312039856506&hvpos=1o4&hvnetw=g&hvrand=534954249629846417&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9021564&hvtargid=pla-648678196229)
+* [Voltage regulator](https://www.pololu.com/product/2865)
+* [12 servo motors](https://www.amazon.com/Smraza-Helicopter-Airplane-Controls-Experiments/dp/B07L2SF3R4/ref=sr_1_1_sspa?keywords=hobby+servo+motor&qid=1553308350&s=toys-and-games&sr=1-1-spons&psc=1)
+
+The 3D print design was taken from [WIFI Quadruped V2 Crawling Robot](https://www.thingiverse.com/thing:3122758) by [mwilmar](https://www.thingiverse.com/mwilmar/about)
+
+#Software
 
 ## Getting started
 ### Pre requisites and variations
@@ -153,6 +165,33 @@ These variables are:
 
 
 ## Results
+The algorithm bases fitness on three metrics:
+
+* Distance travelled.
+* Average height of the chassis over the duration of the run.
+* The average tilt in pitch and roll of the chassis throught the run.
+
+
+The output of the algorithm will be:
+
+* A .txt file after each generation is done of the individuals in the population. These files are named 'evolution_1_gen<GEN_NUM_>' (The results are in the form 'fitness:[list of joint values]')
+* A .txt file called 'evolution_1_fitness.txt' after the whole process has completed. This file is a list of the fitness scores of the fittest individual at each generation.
+* A .txt file called 'evolution_1_breakdown.txt' after the whole process has completed. This file is a list of the fitness scores of the fittest individual at each generation and a list of the cumulative heights throughout the run.
+
+These results can be copied and pasted into:
+
+* The [runner.py](/src/runner.py) file as the list variable named `best`. This will replay that gait in Gazebo.
+
+* The [runner1.py](/src/pi_code/runner1.py) file in the src/pi_code directory. This file can be placed on the raspberry pi and run on the raspberry pi to get the 3d printed robot to walk.
+
+To final implementation can be seen here:
+
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
+" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 
 ## Credit
+
+* [mwilmar](https://www.thingiverse.com/mwilmar/about) for the quadruped design.
+* [Brett Israelsen](https://bisraelsen.github.io/2017/docker/) for the skeleton of the Nvidia ros/gazebo docker set up.
