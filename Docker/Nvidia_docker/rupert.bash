@@ -12,15 +12,18 @@ then
     chmod a+r $XAUTH
 fi
 
-docker run -it \
-    --env="DISPLAY=$DISPLAY" \
-    --env="QT_X11_NO_MITSHM=1" \
-    --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
-    -env="XAUTHORITY=$XAUTH" \
-    --volume="$XAUTH:$XAUTH" \
-    --runtime=nvidia \
-    rupert_full \
-
+if (( $# == 1 )); then
+    docker run -it \
+        --env="DISPLAY=$DISPLAY" \
+        --env="QT_X11_NO_MITSHM=1" \
+        --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
+        --env="XAUTHORITY=$XAUTH" \
+        --volume="$XAUTH:$XAUTH" \
+        --runtime=nvidia \
+        $1
+else
+    echo "No container name given"
+fi
 export containerId=$(sudo docker ps -l -q)
 xhost +local:`sudo docker inspect --format='' $containerId`
 sudo docker start $containerId
