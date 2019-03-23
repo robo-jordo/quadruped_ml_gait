@@ -1,8 +1,10 @@
 # Rupert learns to walk
 
-This project aims to use machine learning to train a quadrupedal robot to walk. The machine learning is done in simulation using ROS and gazebo. Once the gait is learned it is implemented on a physical 3D printed quadruped that is actuated using hobby servo motors. The model I used can be found on thingiverse. ............
+This project aims to use machine learning to train a quadrupedal robot to walk. The machine learning is done in simulation using ROS and gazebo. Once the gait is learned it is implemented on a physical 3D printed quadruped that is actuated using hobby servo motors.
 
-This project focused on an implemnetation of evolutionary algorithms in order to have a robot learn a gait. However the underlying framework that has been set up to acheive this can be used for many other applications in machine learning that uses simulation.
+This project focused on an implementation of evolutionary algorithms in order to have a robot learn a gait. However the underlying framework that has been set up to acheive this can be used for many other applications in machine learning that uses simulation.
+
+More information about the algorithm used can be found on my [portfolio](https://robo-jordo.github.io/portfolio/)
 
 ## Motivation 
 This project was developed by me as a winter project credit while completing a Master's in Robotics at Northwestern University.
@@ -186,8 +188,8 @@ These results can be copied and pasted into:
 
 To final implementation can be seen here:
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=YOUTUBE_VIDEO_ID_HERE
-" target="_blank"><img src="http://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg" 
+<a href="https://www.youtube.com/watch?v=26KfOthAEk8&feature=youtu.be
+" target="_blank"><img src="http://img.youtube.com/vi/26KfOthAEk8/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
 
