@@ -188,7 +188,7 @@ These results can be copied and pasted into:
 
 To final implementation can be seen here:
 
-<a href="https://www.youtube.com/watch?v=26KfOthAEk8&feature=youtu.be
+<a href="https://www.youtube.com/watch?v=98T7DQ4kf7
 " target="_blank"><img src="http://img.youtube.com/vi/26KfOthAEk8/0.jpg" 
 alt="IMAGE ALT TEXT HERE" width="240" height="180" border="10" /></a>
 
